@@ -32,14 +32,23 @@ func mapCsvData(data [][]string) (map[string]string, int) {
 }
 
 func quiz_game(data [][]string) {
-	questionsAnswers, lines := mapCsvData(data)
-	fmt.Printf("------------ Total of %v Questions ------------\n", lines)
-	var counter int
+	var counter int = 1
+	var answer string
+	var right int
+	questionsAnswers, line := mapCsvData(data)
+
 	for k, v := range questionsAnswers {
-		fmt.Printf("Problem #%v: %s?", counter)
-		// TODO if v = y...
+		fmt.Printf("Problem #%v: %s = ", counter, k)
+		fmt.Scanln(&answer)
+
 		counter++
+		if answer == v {
+			right += 1
+			continue
+		}
 	}
+
+	fmt.Printf("You scored %v of counter %v\n", right, line)
 }
 
 func main() {
